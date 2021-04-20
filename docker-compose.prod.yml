@@ -1,0 +1,12 @@
+version: "3.1"
+
+services:
+  certbot:
+    depends_on:
+      - webserver
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./certs:/etc/letsencrypt
+      - ./wordpress:/var/www/html
+    command: certonly --webroot --webroot-path=/var/www/html --email YOUR_EMAIL --agree-tos --no-eff-email --force-renewal -d example.com -d www.example.com
